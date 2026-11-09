@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteSetting {
+  id        String   @id @default("default")
+  schoolName String  @default("Spring Garden Kids World")
+  tagline    String?
+  address    String?
+  phone      String?
+  email      String?
+  officeHours String?
+  facebookUrl String?
+  tiktokUrl   String?
+  mapEmbedUrl String?
+  footerAbout String?
+  heroTitle   String?
+  heroSubtitle String?
+  heroImageUrl String?
+  statStudents String?
+  statParents  String?
+  statTeachers String?
+  statEvents   String?
+  updatedAt  DateTime @updatedAt
+}
+
+model GalleryCategory {
+  id          String         @id @default(cuid())
+  name        String
+  slug        String         @unique
+  description String?
+  sortOrder   Int            @default(0)
+  published   Boolean        @default(true)
+  images      GalleryImage[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model GalleryImage {
+  id         String          @id @default(cuid())
+  categoryId String
+  category   GalleryCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  url        String
+  publicId   String?
+  caption    String?
+  sortOrder  Int             @default(0)
+  published  Boolean         @default(true)
+  createdAt  DateTime        @default(now())
+
+  @@index([categoryId])
+}
+
+model StaffMember {
+  id         String   @id @default(cuid())
+  name       String
+  role       String
+  bio        String?
+  photoUrl   String?
+  publicId   String?
+  department String?
+  sortOrder  Int      @default(0)
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Program {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  ageRange    String?
+  imageUrl    String?
+  publicId    String?
+  sortOrder   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model FeePlan {
+  id        String   @id @default(cuid())
+  name      String
+  price     String
+  period    String?  @default("monthly")
+  features  String[] @default([])
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String?
+  location  String?
+  quote     String
+  photoUrl  String?
+  publicId  String?
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Inquiry {
+  id        String   @id @default(cuid())
+  firstName String?
+  lastName  String?
+  email     String?
+  phone     String?
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}
