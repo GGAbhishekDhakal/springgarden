@@ -33,12 +33,14 @@ export function LegacyHeader({ settings }: { settings: Settings }) {
 
       <div className="container">
         <div className="menu-wrap d-flex align-items-center">
+          <span className="d-inline-block d-lg-none"><a href="#" className="text-black site-menu-toggle js-menu-toggle py-5"><span className="icon-menu h3 text-black"></span></a></span>
           <nav className="site-navigation text-left mr-auto d-none d-lg-block" role="navigation">
             <ul className="site-menu main-menu js-clone-nav mr-auto ">
               <li><Link href="/" className="nav-link">Home</Link></li>
               <li><Link href="/about" className="nav-link">About</Link></li>
               <li><Link href="/programs" className="nav-link">Programs</Link></li>
               <li><Link href="/gallery" className="nav-link">Gallery</Link></li>
+              <li><Link href="/pricing" className="nav-link">Pricing</Link></li>
               <li><Link href="/contact" className="nav-link">Contact</Link></li>
             </ul>
           </nav>

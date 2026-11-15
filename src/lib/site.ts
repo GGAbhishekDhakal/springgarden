@@ -47,6 +47,11 @@ export const legacyTestimonials = [
   { id: "lt3", name: "Parent of a Primary Student", role: "Parent", location: "Kathmandu", quote: "The school takes a truly holistic approach. My child is growing in confidence, in studies and in good values.", photoUrl: "/images/person_2.jpg" },
 ];
 
+export const legacyFeePlans = [
+  { id: "lf1", name: "Playgroup", price: "Rs. 3,500", features: ["Activity-based curriculum", "Loving & safe care", "Music, rhymes & playtime"], style: "teal", btn: "btn-teal" },
+  { id: "lf2", name: "Kindergarten & Primary", price: "Rs. 5,000", features: ["English & Nepali medium", "Experienced teachers", "Sports, art & events", "Regular parent updates"], style: "danger", btn: "btn-danger" },
+];
+
 export async function getSettings() {
   try {
     const s = await prisma.siteSetting.findUnique({ where: { id: "default" } });
